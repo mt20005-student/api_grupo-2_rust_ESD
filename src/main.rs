@@ -27,7 +27,9 @@ async fn main(){
 }
 
 
-fn unificar_routers(pool: sqlx::PgPool) -> axum::Router{
-
-    let mut router1 = 
+fn unificar_routers(pool: sqlx::PgPool) -> axum::Router {
+    // let mut router1 = pais_router(pool.clone());
+    // let router2 = persona_router(pool.clone());
+    // router1.merge(router2)
+    axum::Router::new()
 }
