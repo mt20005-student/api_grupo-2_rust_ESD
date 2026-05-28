@@ -2,6 +2,7 @@ mod config;
 mod models;
 mod repository;
 mod service;
+mod controller;
 
 
 use config::config::crear_pool;
