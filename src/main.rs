@@ -6,7 +6,7 @@ mod controller;
 
 
 use config::config::crear_pool;
-use sqlx::pool;
+use controller::autores_controller::autores_router;
 
 
 #[tokio::main]
@@ -29,8 +29,9 @@ async fn main(){
 
 
 fn unificar_routers(pool: sqlx::PgPool) -> axum::Router {
-    // let mut router1 = pais_router(pool.clone());
-    // let router2 = persona_router(pool.clone());
-    // router1.merge(router2)
-    axum::Router::new()
+    // Aquí puedes agregar más routers para otras entidades como libros, etc.
+    let api_routes = axum::Router::new()
+        .nest("/autores", autores_router(pool.clone()));    
+
+    axum::Router::new().nest("/api/v1", api_routes)
 }
