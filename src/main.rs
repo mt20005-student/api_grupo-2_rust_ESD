@@ -9,6 +9,12 @@ use config::config::crear_pool;
 use controller::autores_controller::autores_router;
 
 
+use controller::usuarios_controller::usuarios_router;
+
+use controller::editoriales_controller::editoriales_router;
+
+
+
 #[tokio::main]
 async fn main(){
     let direccion = "127.0.0.1:3000";
@@ -28,10 +34,12 @@ async fn main(){
 }
 
 
-fn unificar_routers(pool: sqlx::PgPool) -> axum::Router {
-    // Aquí puedes agregar más routers para otras entidades como libros, etc.
-    let api_routes = axum::Router::new()
-        .nest("/autores", autores_router(pool.clone()));    
+    fn unificar_routers(pool: sqlx::PgPool) -> axum::Router {
+        // Aquí puedes agregar más routers para otras entidades como libros, etc.
+        let api_routes = axum::Router::new()
+            .nest("/autores", autores_router(pool.clone()))
+            .nest("/usuarios", usuarios_router(pool.clone()))
+            .nest("/editoriales", editoriales_router(pool.clone()));
 
-    axum::Router::new().nest("/api/v1", api_routes)
-}
+        axum::Router::new().nest("/api/v1", api_routes)
+    }
