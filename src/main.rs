@@ -11,6 +11,8 @@ use controller::autores_controller::autores_router;
 
 use controller::usuarios_controller::usuarios_router;
 
+use controller::editoriales_controller::editoriales_router;
+
 
 
 #[tokio::main]
@@ -36,7 +38,8 @@ async fn main(){
         // Aquí puedes agregar más routers para otras entidades como libros, etc.
         let api_routes = axum::Router::new()
             .nest("/autores", autores_router(pool.clone()))
-            .nest("/usuarios", usuarios_router(pool.clone()));
+            .nest("/usuarios", usuarios_router(pool.clone()))
+            .nest("/editoriales", editoriales_router(pool.clone()));
 
         axum::Router::new().nest("/api/v1", api_routes)
     }
