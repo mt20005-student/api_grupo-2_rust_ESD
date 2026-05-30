@@ -17,5 +17,5 @@ pub struct NuevaEditorial {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct ActualizarEditorial {
     pub nombre: Option<String>,
-    pub pais: Option<Option<String>>,
+    pub pais: Option<String>,
 }
